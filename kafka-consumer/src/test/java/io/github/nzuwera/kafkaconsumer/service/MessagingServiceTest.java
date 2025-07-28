@@ -15,14 +15,13 @@ class MessagingServiceTest {
 
     private MessagingService messagingService;
     private ListAppender<ILoggingEvent> listAppender;
-    private Logger logger;
 
     @BeforeEach
     void setUp() {
         messagingService = new MessagingService();
         
         // Get the logger for MessagingService
-        logger = (Logger) LoggerFactory.getLogger(MessagingService.class);
+        Logger logger = (Logger) LoggerFactory.getLogger(MessagingService.class);
         
         // Create and start a ListAppender to capture log messages
         listAppender = new ListAppender<>();
