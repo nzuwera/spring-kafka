@@ -20,7 +20,8 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -59,7 +60,7 @@ class MessageControllerIntTest {
         // Assert
         ConsumerRecord<String, String> received = records.poll(5, TimeUnit.SECONDS);
         assertNotNull(received);
-        assertEquals(testMessage, received.value());
+        assertEquals(testMessage, received.value().replaceAll("\"", ""));
 
         // Cleanup
         container.stop();
@@ -79,8 +80,8 @@ class MessageControllerIntTest {
 
         // Assert
         ConsumerRecord<String, String> received = records.poll(5, TimeUnit.SECONDS);
-//        assertNotNull(received);
-        assertEquals("Hello World!", received.value());
+        assertNotNull(received);
+        assertEquals("Hello World!", received.value().replaceAll("\"", ""));
 
         // Cleanup
         container.stop();
