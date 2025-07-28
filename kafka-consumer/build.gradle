@@ -58,6 +58,10 @@ tasks.register('integrationTest', Test) {
     classpath = sourceSets.integrationTest.runtimeClasspath
 }
 
+tasks.named('processIntegrationTestResources') {
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+}
+
 configurations {
     compileOnly {
         extendsFrom annotationProcessor
